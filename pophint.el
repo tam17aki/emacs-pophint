@@ -527,9 +527,9 @@ NOT-SWITCH-WINDOW is t or nil. If non-nil, disable switching window when select 
         (with-selected-window (or (and (windowp window) (window-live-p window) window)
                                   (nth 0 (get-buffer-window-list)))
           (save-restriction
-            (narrow-to-region (save-excursion (or (when (forward-line -100) (point))
+            (narrow-to-region (save-excursion (or (when (move-to-window-line 1) (point))
                                                   (point-min)))
-                              (save-excursion (or (when (forward-line 100) (point))
+                              (save-excursion (or (when (move-to-window-line -1) (point))
                                                   (point-max))))
             (loop with srcmtd = (pophint--expand-function-symbol (assoc-default 'method source))
                   with init = (pophint--expand-function-symbol (assoc-default 'init source))
